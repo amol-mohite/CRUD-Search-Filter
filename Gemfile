@@ -39,6 +39,7 @@ gem 'bootsnap', '>= 1.1.0', require: false
 #for css
 gem 'bulma-rails', '~> 0.9.0'
 
+gem 'haml'
 #simple Form
 gem 'simple_form', '~> 5.0', '>= 5.0.3'
 
@@ -55,9 +56,9 @@ group :development do
   gem 'spring'
   gem 'spring-watcher-listen', '~> 2.0.0'
   #Guard is a command line tool to easily handle events on file system modifications.
-  gem 'guard', '~> 2.16', '>= 2.16.2'
+  gem 'guard'
   #Guard::LiveReload automatically reloads your browser when 'view' files are modified.
-    gem 'guard-livereload', '~> 2.5', '>= 2.5.2'
+  gem 'guard-livereload', '~> 2.5', '>= 2.5.2', require: false
 end
 
 group :test do
