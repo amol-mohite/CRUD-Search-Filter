@@ -1,0 +1,25 @@
+!!!
+%html
+  %head
+    %meta{content: "text/html; charset=UTF-8", "http-equiv" => "Content-Type"}/
+    %title DemoBlog
+    = csrf_meta_tags
+    = stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload'
+    = javascript_include_tag 'application', 'data-turbolinks-track': 'reload'
+  %body
+    %section.hero.is-primary.is-bold
+      .hero-head
+        %nav.navbar
+          .container
+            .navbar-brand
+              %h2.title
+                = link_to 'Blog', root_path, class: "navbar-item"
+            #navbarMenuHeroA.navbar-menu
+              .navbar-end
+                %h3.subtitle
+                  = link_to "Create New Post", new_post_path, class:"navbar-item"
+      .hero-body
+        .container.has-text-centered
+          %h1.title
+            = yield :page_title
+    = yield

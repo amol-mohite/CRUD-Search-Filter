@@ -59,6 +59,7 @@ group :development do
   gem 'guard'
   #Guard::LiveReload automatically reloads your browser when 'view' files are modified.
   gem 'guard-livereload', '~> 2.5', '>= 2.5.2', require: false
+  gem 'awesome_print'
 end
 
 group :test do
