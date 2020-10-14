@@ -10,15 +10,38 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_10_02_112422) do
+ActiveRecord::Schema.define(version: 2020_10_14_203253) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "comments", force: :cascade do |t|
+    t.string "name"
+    t.text "message"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer "post_id"
+    t.boolean "is_deleted", default: false
+  end
 
   create_table "posts", force: :cascade do |t|
     t.string "title"
     t.text "content"
     t.boolean "is_deleted"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "providers", force: :cascade do |t|
+    t.string "name"
+    t.integer "lowest_price"
+    t.float "rating", default: 0.0
+    t.string "max_speed"
+    t.text "description"
+    t.string "contact_no"
+    t.string "isp_email"
+    t.string "image"
+    t.string "website"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

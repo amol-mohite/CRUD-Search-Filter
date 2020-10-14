@@ -1,8 +1,0 @@
-.section
-  = simple_form_for @post do |f|
-    =f.hidden_field :is_deleted, :value => false
-    .field.control
-      = f.input :title, input_html: { class: 'input' }, wrapper: false, label_html: { class: 'label' }, placeholder:  "Name me"
-    .field.control
-      = f.input :content, input_html: { class: 'textarea' }, wrapper: false, label_html: { class: 'label' }, placeholder: "What's on your mind"
-    = f.button :submit, class: "button is-primary"

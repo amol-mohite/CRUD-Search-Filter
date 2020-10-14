@@ -1,8 +1,8 @@
 !!!
 %html
   %head
-    %meta{content: "text/html; charset=UTF-8", "http-equiv" => "Content-Type"}/
-    %title DemoBlog
+    %meta{content: "text/html; charset=UTF-8", "http-equiv" => "Content-Type"}
+    %title KnowISP
     = csrf_meta_tags
     = stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload'
     = javascript_include_tag 'application', 'data-turbolinks-track': 'reload'
@@ -13,13 +13,18 @@
           .container
             .navbar-brand
               %h2.title
-                = link_to 'Blog', root_path, class: "navbar-item"
-            #navbarMenuHeroA.navbar-menu
-              .navbar-end
-                %h3.subtitle
-                  = link_to "Create New Post", new_post_path, class:"navbar-item"
-      .hero-body
-        .container.has-text-centered
-          %h1.title
-            = yield :page_title
+                /= link_to 'KnowISP', root_path, class: "navbar-item"
+        #navbarMenuHeroA.navbar-menu
+          .navbar
+            %h2.title
+              = link_to 'Home', root_path, class: "navbar-item"
+            %h1.title
+              = link_to "Create New ISP", new_provider_path, class:"navbar-item"
+          .navbar
+            %h1.title
+              = link_to "Login", new_provider_path, class:"navbar-item"
+    %section.hero.is-primary.is-bold.hero-footer
+      .container.has-text-centered
+        %h1.title
+          = yield :page_title
     = yield

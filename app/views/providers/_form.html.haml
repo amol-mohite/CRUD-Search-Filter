@@ -1,0 +1,24 @@
+.section
+  = simple_form_for @provider do |f|
+    .field.control
+      = f.error_notification id: 'user_error_message', class: 'form_error'
+    .field.control
+      = f.input :name, input_html: { class: 'input', required: true }, wrapper: false, label_html: { class: 'label'}, placeholder:  "Name"
+    .field.control
+      = f.input :isp_email, label: "Email", input_html: { class: 'input'}, wrapper: false, label_html: { class: 'label' }, placeholder: 'username@domain.com'
+    .field.control
+      = f.input :contact_no, label: "Contact Number", as: :numeric , input_html: { class: 'input'}, wrapper: false,label_html: { class: 'label' }, placeholder: '9999999999'
+    .field.control
+      =f.input :rating, input_html: {type: 'range',step: 1,  min: 0, max: 5}, wrapper: false, label_html: { class: 'label'}, :type => "range"
+    .field.control
+      = f.input :website, label: "Website Url",input_html: { class: 'input'}, wrapper: false, label_html: { class: 'label' }, placeholder: 'http://'
+    .field.control
+      = f.input :image, label:"Image Link",input_html: { class: 'input'}, wrapper: false, label_html: { class: 'label' }, placeholder: 'http://'
+    .field.control
+      = f.input :max_speed, label: "Maximum BandWidth (Mbps) ", as: :numeric, input_html: { class: 'input'}, wrapper: false, label_html: { class: 'label' }, placeholder: '10'
+    .field.control
+      -unit = MaxrvuTest::Application.config.currency_symbol
+      = f.input :lowest_price, label: "Lowest Price(#{unit}) ", as: :numeric, input_html: { class: 'input'}, wrapper: false, label_html: { class: 'label' }, placeholder: "500#{unit}"
+    .field.control 
+      = f.input :description, input_html: { class: 'textarea' }, wrapper: false, label_html: { class: 'label' }, placeholder: 'Tell us more about you...'
+    = f.button :submit, class: 'button is-primary'

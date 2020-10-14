@@ -1,6 +1,9 @@
 Rails.application.routes.draw do
-  # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
-  resources :posts
-
-  root 'posts#index'
+  get 'posts/'=> 'posts#bin'
+  post 'posts/:id'=> 'posts#soft_delete'
+  resources :posts do
+    resources :comments
+  end
+  resources :providers
+  root 'providers#index'
 end

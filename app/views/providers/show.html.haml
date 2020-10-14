@@ -1,0 +1,40 @@
+%link{:href => "https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css", :rel => "stylesheet"}
+- content_for :page_title, @provider.name
+%section.section
+  .container
+    %article.media
+      %figure.media-left
+        %a{href: @provider.website, target: "_blank"}
+          %figure.image.is-128x128
+            %img{alt: "Image Processing", src: @provider.image.to_s}
+      .media-content
+        .content.level-left
+          .level-item
+            %strong
+              - @provider.rating.to_i.times do
+                %span.fa.fa-star{:style => "color:orange"}
+              - @provider.blank_stars.times do
+                %span.fa.fa-star
+        %p
+          %strong=@provider.isp_email              
+        %p
+          %strong=@provider.contact_no
+        %p
+          %a.b{:href => @provider.website} Visit Website
+        %p  
+          %small=@provider.created_at.strftime('%b%Y')  
+      %nav.level.level-left
+        %p.level-item
+          = link_to "Edit", edit_provider_path(@provider), class:"button"
+        %p.level-item
+          = link_to "Delete", provider_path(@provider),method: :delete,data: { confirm: "Are you sure?" }, class:"button is-danger"
+    %hr
+    .content
+      .label.subtitle.is-5 Amount
+      .subtitle.is-5 Our Lowerst Price is #{MaxrvuTest::Application.config.currency_symbol}#{@provider.lowest_price.to_i}
+    .content
+      .label.subtitle.is-5 Speed
+      .subtitle.is-5 Get Maximum bandwidth upto #{@provider.max_speed}
+    .content
+      .label.subtitle.is-5 Description
+      = @provider.description

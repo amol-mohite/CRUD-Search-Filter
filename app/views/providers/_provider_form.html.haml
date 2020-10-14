@@ -1,0 +1,57 @@
+%link{:href => "https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css", :rel => "stylesheet"}
+  
+  .section.container
+    .level-item.left
+      %p.subtitle.is-5
+        -if @providers.count > 0
+          %strong Total #{@providers.count} Providers
+    .level-item.level-right
+      = form_tag '', method:'GET' do  
+        .level-item
+          .field.has-addons
+            %p.control  
+              %input.input{:placeholder => "Find a Internet Provider", :type => "text", class: 'search', required: 'true', name: 'search', value: params[:search]}
+            %p.control
+              %button.button
+                Search
+    .level-item.level-right  
+      = form_tag '', :method => 'get' do
+        .level-item.right
+          .control
+            .select.is-primary
+              .select
+                = select_tag(:filter, options_for_select(Provider::TYPE_OF_FILTER.keys, selected: params[:filter].presence || 'Featured'), onchange: 'this.form.submit();')
+  .section.container
+    -if @providers.count==0 
+      %figure
+        %img{alt: "Image Processing", src: 'https://vanmak.in/assets/images/no_result.gif', height: "700",width:"1000"}
+    - @providers.each do |provider|
+      .card.card-content
+        %table.table.is-hoverable.is-striped.is-fullwidth
+          %tr
+            %td{align:"left"}
+              %a{href: "providers/#{provider.id}", target: "_blank"}  
+                %figure.image.is-128x128
+                  %img{alt: "Image Processing", src: provider.image.to_s}
+            %td{align:"center"}
+              .title.is-4
+                = link_to provider.name, provider
+              .subtitle.is-6 #{MaxrvuTest::Application.config.currency_symbol}#{provider.lowest_price.to_i}
+            %td{align:"right"}
+              - provider.rating.to_i.times do
+                %span.fa.fa-star{:style => "color:orange"}
+              - provider.blank_stars.times do
+                %span.fa.fa-star
+              .subtitle.is-6=provider.created_at.strftime('%b%Y')        
+
+        .content
+          .Title.is-5{style: 'color:black;font-size:1.1em;'} Maximum Bandwidth: #{provider.max_speed.to_f} Mbps
+        .content
+          .Title.is-5 
+            %a.b{:href => provider.website} #{provider.website}
+        .content
+          - if provider.description.length > 250
+            = truncate(provider.description, length: 250)
+            = link_to '...Read more', provider
+          - else
+            = provider.description
