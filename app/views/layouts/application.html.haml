@@ -7,24 +7,42 @@
     = stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload'
     = javascript_include_tag 'application', 'data-turbolinks-track': 'reload'
   %body
+    %p.navbar-text.float-right
+      - if user_signed_in?
+        Logged in as
+        =succeed "." do
+          %strong= current_user.email
+        = link_to 'Edit profile', edit_user_registration_path, :class => 'navbar-link'
+        #{link_to "Logout", destroy_user_session_path, method: :delete, :class => 'navbar-link'}
     %section.hero.is-primary.is-bold
       .hero-head
         %nav.navbar
           .container
             .navbar-brand
-              %h2.title
-                /= link_to 'KnowISP', root_path, class: "navbar-item"
         #navbarMenuHeroA.navbar-menu
           .navbar
             %h2.title
               = link_to 'Home', root_path, class: "navbar-item"
-            %h1.title
-              = link_to "Create New ISP", new_provider_path, class:"navbar-item"
-          .navbar
-            %h1.title
-              = link_to "Login", new_provider_path, class:"navbar-item"
+            -if user_signed_in?
+              %h1.title
+                = link_to "Create New ISP", new_provider_path, class:"navbar-item"
+              %h1.title
+                = link_to 'Edit profile', edit_user_registration_path, class:"navbar-item"
+              %h1.title
+                = link_to "Logout", destroy_user_session_path, method: :delete, class: 'navbar-item'
+            -else  
+              .navbar
+                %h1.title
+                  = link_to "Sign up", new_user_session_path, class:"navbar-item"
+              .navbar
+                %h1.title
+                  = link_to "Login", new_user_registration_path, class:"navbar-item"
     %section.hero.is-primary.is-bold.hero-footer
       .container.has-text-centered
         %h1.title
           = yield :page_title
+    - if notice
+      %p.alert.alert-success{:role => "alert"}= notice
+    - if alert
+      %p.alert.alert-danger{:role => "alert"}= alert
     = yield

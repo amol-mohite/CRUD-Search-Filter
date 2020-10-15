@@ -1,6 +1,6 @@
 class ProvidersController < ApplicationController 
   before_action :set_provider, only: [:show, :edit, :update, :destroy]
-	
+  before_action :authenticate_user!, only: [:edit, :update, :destroy, :new, :create]
 	def index
 	  if params[:search].present?
 	  	@providers = Provider.search(params[:search]).order('created_at')
@@ -41,10 +41,10 @@ class ProvidersController < ApplicationController
     end
 	end
  
-  def destroy
-    @provider.destroy
-    redirect_to providers_path
-  end
+    def destroy
+      @provider.destroy
+      redirect_to providers_path
+    end
   
   private
 
